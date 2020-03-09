@@ -1,28 +1,19 @@
 WARNING = -Wall -Wshadow --pedantic
 ERROR = -Wvla -Werror
 GCC = gcc -std=c99 -g $(WARNING) $(ERROR)
-SRCS = addnum.c
-
+DIRS = HW1 HW2 HW4
 OBJS = $(SRCS:%.c=%.o)
+ALLDIRS = $(wildcard */)
 
-main: $(OBJS) 
-	$(GCC) $(OBJS) -o main
+test: 
+	for subdir in $(DIRS); do \
+		make -C $$subdir test; \
+	done
 
-# convert .c to .o 
-.c.o: 
-	$(GCC) $(TESTFALGS) -c $*.c 
 
-test: test1 test2
-
-test1: main
-	./main inputs/test1 > output1
-	diff output1 expected/answer1
-
-test2: main
-	./main inputs/test2 > output2
-	diff output2 expected/answer2
-
-clean: # remove all machine generated files
-	rm -f main *.o output?
+clean: 
+	for subdir in $(ALLDIRS); do \
+		make -C $$subdir clean; \
+	done
 
 
