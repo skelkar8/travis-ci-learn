@@ -18,6 +18,6 @@ int main(int argc, char * argv[])
       fclose (fptr);
       return EXIT_FAILURE;
     }
-  printf("%d\n", val1 - val2);
+  printf("%d\n", val1 + val2);
   return EXIT_SUCCESS;
 }
